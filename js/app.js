@@ -149,6 +149,7 @@ function TokenAnimator(domobj, tl){
             bottom: aTokenPacketBottom,
             onComplete: callback
         }));
+        tl.add(this.reset.bind(this));
     };
 
     /**
