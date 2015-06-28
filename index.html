@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>GreenSock: Basic Tween</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+        body{
+            background-color:#000;
+        }
+        .packet {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0px;
+            background-color: cadetblue;
+        }
+        .token{
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            margin: 15px;
+            background-color: green;
+            float: left;
+        }
+        .token-row{
+            position: absolute;
+        }
+        #token-row-1{
+            bottom: 10px;
+        }
+        #token-row-2{
+            bottom: 40px;
+        }
+        #token-row-3{
+            bottom: 70px;
+        }
+        #bucket{
+            position: relative;
+            left: 500px;
+            margin-top: 80px;
+            width: 200px;
+            height: 200px;
+            background-color: beige;
+        }
+        #bucket-ext{
+            position: absolute;
+            left: 90px;
+            top: 200px;
+            width: 20px;
+            height: 40px;
+            background-color: beige;
+        }
+        #packet-wrapper{
+            margin-top: 50px;
+        }
+        #token-animate{
+            position: absolute;
+            bottom: 10px;
+            left: 95px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+        #controls{
+            position: absolute;
+            left: 50px;
+            height: 200px;
+            width: 400px;
+            top: 80px;
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="row">
+        <div id="controls">
+
+
+        </div>
+
+        <div id="bucket">
+            <div class="token-row" id="token-row-1">
+                <div id="token-1" class="token"></div>
+                <div id="token-2" class="token"></div>
+                <div id="token-3" class="token"></div>
+                <div id="token-4" class="token"></div>
+                <div id="token-5" class="token"></div>
+            </div>
+            <div class="token-row" id="token-row-2">
+                <div id="token-6" class="token"></div>
+                <div id="token-7" class="token"></div>
+                <div id="token-8" class="token"></div>
+                <div id="token-9" class="token"></div>
+                <div id="token-10" class="token"></div>
+            </div>
+            <div class="token-row" id="token-row-3">
+                <div id="token-11" class="token"></div>
+                <div id="token-12" class="token"></div>
+                <div id="token-13" class="token"></div>
+                <div id="token-14" class="token"></div>
+                <div id="token-15" class="token"></div>
+            </div>
+
+            <div id="token-animate" class="token"></div>
+            <div id="bucket-ext"></div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12" id="packet-wrapper">
+            <div id="packet-1" class="packet"></div>
+            <div id="packet-2" class="packet"></div>
+            <div id="packet-3" class="packet"></div>
+            <div id="packet-4" class="packet"></div>
+            <div id="packet-5" class="packet"></div>
+            <div id="packet-6" class="packet"></div>
+            <div id="packet-7" class="packet"></div>
+            <div id="packet-8" class="packet"></div>
+            <div id="packet-9" class="packet"></div>
+            <div id="packet-10" class="packet"></div>
+        </div>
+    </div>
+
+</div>
+
+<!--- The following scripts are necessary to do TweenLite tweens on CSS properties -->
+<script type="text/javascript" src="js/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/greensock/TimelineLite.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+
+<script>
+    //we'll use a window.onload for simplicity, but typically it is best to use either jQuery's $(document).ready() or $(window).load() or cross-browser event listeners so that you're not limited to one.
+
+    window.onload = function(){
+        init();
+    }
+</script>
+
+</body>
+</html>
