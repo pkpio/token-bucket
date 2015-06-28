@@ -3,7 +3,7 @@
  */
 
 // Token Bucket Params
-var TokenRate = 3;
+var TokenRate = 5;
 var PacketRate = 2;
 var MaxTokens = 15;     // # of token objects defined in HTML
 var MaxPackets = 10;    // # of Packet objects defined in HTML
@@ -15,9 +15,15 @@ var bucketCenter = "590px";         // Center of the bucket. The packets stop he
 var aTokenDefaultBottom = "10px";   // Default value of bottom for animator token
 var aTokenPacketBottom = "-65px";   // Final value of bottom for animator token
 
+// Animation times
+var bucketToPacket = 0.2;    // Time taken for token to enter packet from bucket
+var sourceToBucket = 0.5;    // Time taken for packet to reach bucket from source
+var bucketToNetwork = 0.5;   // Time taken for packet to reach network from bucket
+
 // Objects
 var mTokens = [];
 var mPackets = [];
+var mPacketsTransit = [];
 var mAnimToken;
 var mAvailTokens = 0;
 
@@ -38,14 +44,48 @@ function Packet(domobj, tl, hasToken) {
     /**
      * Animates the Packet object to bucket and executes the
      * token check function after the Packet arrives at the bucket
-     *
-     * @param delay
-     *      Delay before animation
      */
-    this.animateToBucket = function(delay){
-        delay = (delay === undefined) ? 0: delay;
-        tl.to(domobj, 1, {left: bucketCenter}, "+=" + delay);
-        //tl.to(domobj, 1, {left: packetWrapperWidth}, "+=1");
+    this.animateToBucket = function(){
+        tl.add(TweenLite.to(domobj, sourceToBucket, {
+            left: bucketCenter,
+            onComplete: this.checkToken.bind(this)
+        }));
+    };
+
+    /**
+     * Checks if there are any tokens left.
+     *
+     * If so, animates a token to packet.
+     */
+    this.checkToken = function(){
+        if(mAvailTokens > 0){
+            consumeToken();
+            mAnimToken.animateToPacket(this.animateToNetwork.bind(this));
+        } else{
+            this.animateToTrash();
+        }
+    };
+
+    this.animateToNetwork = function(){
+        tl.add(TweenLite.to(domobj, bucketToNetwork, {
+            left: packetWrapperWidth,
+            onComplete: function(){
+                var packet = mPacketsTransit.pop();
+                packet.reset();
+                mPackets.unshift(packet);
+            }
+        }));
+    };
+
+    this.animateToTrash = function(){
+        // -TODO-
+    };
+
+    this.reset = function(){
+        tl.add(TweenLite.to(domobj, 0, {
+            left: "0px",
+            top: "0px"
+        }));
     }
 }
 
@@ -100,13 +140,15 @@ function TokenAnimator(domobj, tl){
     /**
      * Animate token to Packet.
      *
-     * @param delay
-     *      Delay before animation
+     *
      */
-    this.animateToPacket = function(delay){
-        delay = (delay === undefined) ? 0: delay;
+    this.animateToPacket = function(callback){
+        this.reset();
         this.generate();
-        tl.to(domobj, 1, {bottom: aTokenPacketBottom}, "+=" + delay);
+        tl.add(TweenLite.to(domobj, bucketToPacket, {
+            bottom: aTokenPacketBottom,
+            onComplete: callback
+        }));
     };
 
     /**
@@ -136,23 +178,35 @@ function init(){
 
     // Init animator token
     mAnimToken = new TokenAnimator(document.getElementById("token-animate"), new TimelineLite());
+    mAnimToken.reset();
 
-    // Init Token generator
+    // Init Token and Packet generator
     TokenGenerator();
-
-    // Test Packet animation
-    for(var k=1; k<=MaxPackets; k++) {
-        var pack = mPackets.pop();
-        pack.animateToBucket(k);
-    }
-    mAnimToken.animateToPacket(0);
+    PacketGenerator();
 }
 
 function TokenGenerator() {
     if(mAvailTokens < MaxTokens) {
-        mTokens[mAvailTokens].generate();
-        mAvailTokens++;
+        generateToken();
     }
-    setTimeout(function(){TokenGenerator();}, TimeScale * 1000 / TokenRate);
+    setTimeout(function(){TokenGenerator()}, TimeScale * 1000 / TokenRate);
+}
+
+function PacketGenerator(){
+    if(mTokens.length > 0){
+        mPacketsTransit.push(mPackets.pop());
+        mPacketsTransit[mPacketsTransit.length - 1].animateToBucket();
+    }
+    setTimeout(function(){PacketGenerator()}, TimeScale * 1000 / PacketRate);
+}
+
+function generateToken(){
+    mTokens[mAvailTokens].generate();
+    mAvailTokens++;
+}
+
+function consumeToken(){
+    mAvailTokens--;
+    mTokens[mAvailTokens].consume();
 }
 
