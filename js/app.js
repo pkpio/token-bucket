@@ -3,8 +3,8 @@
  */
 
 // Token Bucket Params
-var TokenRate = 5;
-var PacketRate = 2;
+var TokenRate = 1;
+var PacketRate = 6;
 var MaxTokens = 15;     // # of token objects defined in HTML
 var MaxPackets = 10;    // # of Packet objects defined in HTML
 var TimeScale = 5;     // All rates are TimeScale times of real time
@@ -18,7 +18,8 @@ var aTokenPacketBottom = "-65px";   // Final value of bottom for animator token
 // Animation times
 var bucketToPacket = 0.2;    // Time taken for token to enter packet from bucket
 var sourceToBucket = 0.5;    // Time taken for packet to reach bucket from source
-var bucketToNetwork = 0.5;   // Time taken for packet to reach network from bucket
+var bucketToNetwork = 0.8;   // Time taken for packet to reach network from bucket
+var bucketToTrash = 0.5;   // Time taken for packet to reach trash from bucket
 
 // Objects
 var mTokens = [];
@@ -70,7 +71,7 @@ function Packet(domobj, tl, hasToken) {
         tl.add(TweenLite.to(domobj, bucketToNetwork, {
             left: packetWrapperWidth,
             onComplete: function(){
-                var packet = mPacketsTransit.pop();
+                var packet = mPacketsTransit.shift();
                 packet.reset();
                 mPackets.unshift(packet);
             }
@@ -78,7 +79,14 @@ function Packet(domobj, tl, hasToken) {
     };
 
     this.animateToTrash = function(){
-        // -TODO-
+        tl.add(TweenLite.to(domobj, bucketToTrash, {
+            top: "50px",
+            onComplete: function(){
+                var packet = mPacketsTransit.shift();
+                packet.reset();
+                mPackets.unshift(packet);
+            }
+        }));
     };
 
     this.reset = function(){
