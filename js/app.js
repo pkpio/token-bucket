@@ -5,8 +5,8 @@
 // Token Bucket Params
 var TokenRate = 1;
 var PacketRate = 6;
-var MaxTokens = 15;     // # of token objects defined in HTML
-var MaxPackets = 10;    // # of Packet objects defined in HTML
+var MaxTokens = 20;     // # of token objects defined in HTML
+var MaxPackets = 20;    // # of Packet objects defined in HTML
 var TimeScale = 5;     // All rates are TimeScale times of real time
 
 // Document design params
