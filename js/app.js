@@ -51,8 +51,8 @@ function init(){
     mAnimToken.reset();
 
     // Update rate UI
-    document.getElementById("token-rate").innerText = TokenRate;
-    document.getElementById("packet-rate").innerText = PacketRate;
+    document.getElementById("token-rate").innerHTML = TokenRate;
+    document.getElementById("packet-rate").innerHTML = PacketRate;
 
     // Init Token and Packet generator
     TokenGenerator();
@@ -65,25 +65,25 @@ function init(){
 function increasePacketRate(){
     if(PacketRate < MaxPacketRate){
         PacketRate++;
-        document.getElementById("packet-rate").innerText = PacketRate;
+        document.getElementById("packet-rate").innerHTML = PacketRate;
     }
 }
 function decreasePacketRate(){
     if(PacketRate > 1){
         PacketRate--;
-        document.getElementById("packet-rate").innerText = PacketRate;
+        document.getElementById("packet-rate").innerHTML = PacketRate;
     }
 }
 function increaseTokenRate(){
     if(TokenRate < MaxTokenRate){
         TokenRate++;
-        document.getElementById("token-rate").innerText = TokenRate;
+        document.getElementById("token-rate").innerHTML = TokenRate;
     }
 }
 function decreaseTokenRate(){
     if(TokenRate > 1){
         TokenRate--;
-        document.getElementById("token-rate").innerText = TokenRate;
+        document.getElementById("token-rate").innerHTML = TokenRate;
     }
 }
 
