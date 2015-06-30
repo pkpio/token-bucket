@@ -92,7 +92,7 @@
             padding: 16px;
         }
         #packet-source{
-            background-color: chocolate;
+            background-color: darkcyan;
             width: 100px;
             height: 100px;
             z-index: 1;
@@ -101,7 +101,7 @@
             color: whitesmoke;
         }
         #packet-destination{
-            background-color: chocolate;
+            background-color: green;
             width: 100px;
             height: 100px;
             z-index: 1;
@@ -110,11 +110,34 @@
             position: absolute;
             right: 25px;
         }
+        #packet-trash{
+            background-color: red;
+            width: 100px;
+            height: 50px;
+            z-index: 1;
+            text-align: center;
+            color: whitesmoke;
+            position: relative;
+            left: 568px;
+            top: 60px;
+        }
+        .title{
+            color: darkorange;
+            text-align: center;
+        }
+        #src-dst-wrapper{
+            height: 200px;
+        }
+        body{
+            color: whitesmoke;
+        }
     </style>
 </head>
 
 <body>
 <div class="container">
+
+    <h1 class="title">Token bucket visualization</h1>
 
     <div class="row">
         <div id="controls">
@@ -203,10 +226,15 @@
             <div id="packet-20" class="packet"></div>
         </div>
 
-        <div class="row">
+        <div class="row" id="src-dst-wrapper">
             <div id="packet-source" class="col-sm-4">Source</div>
+            <div id="packet-trash"  class="col-sm-4">Discarded</div>
             <div id="packet-destination"  class="col-sm-4">Network</div>
         </div>
+    </div>
+
+    <div class="row">
+        A super awesome explanation goes on here about the Token Bucket algo and shit
     </div>
 
 </div>
