@@ -75,7 +75,20 @@
             height: 200px;
             width: 400px;
             top: 80px;
-            background-color: cadetblue;
+            color: whitesmoke;
+        }
+        .control{
+            width: 35px;
+            float: left;
+            padding: 0px 10px;
+            margin: auto;
+        }
+        button.control{
+            color: black;
+            font-size: 14px;
+        }
+        .control-row{
+            padding: 16px;
         }
     </style>
 </head>
@@ -86,6 +99,27 @@
     <div class="row">
         <div id="controls">
 
+            <div class="row control-row">
+                <div class="col-sm-4">Token rate</div>
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-xs control" onclick="decreaseTokenRate()">-</button>
+                    <p id="token-rate" class="control">10</p>
+                    <button type="button" class="btn btn-xs control" onclick="increaseTokenRate()">+</button>
+                </div>
+            </div>
+
+            <div class="row control-row" class="control-row">
+                <div class="col-sm-4">Packet rate</div>
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-xs control" onclick="decreasePacketRate()">-</button>
+                    <p id="packet-rate" class="control">10</p>
+                    <button type="button" class="btn btn-xs control" onclick="increasePacketRate()">+</button>
+                </div>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+                <b>Note: </b> All rates are measured as rate-value per 5 seconds
+            </div>
 
         </div>
 
