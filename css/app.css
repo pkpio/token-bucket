@@ -1,0 +1,122 @@
+
+body{
+    background-color:#000;
+}
+.packet {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0px;
+    background-color: cadetblue;
+    z-index: -1;
+}
+.token{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin: 15px;
+    background-color: green;
+    float: left;
+}
+.token-row{
+    position: absolute;
+}
+#token-row-1{
+    bottom: 10px;
+}
+#token-row-2{
+    bottom: 40px;
+}
+#token-row-3{
+    bottom: 70px;
+}
+#token-row-4{
+    bottom: 100px;
+}
+#bucket{
+    position: relative;
+    left: 500px;
+    margin-top: 80px;
+    width: 200px;
+    height: 200px;
+    background-color: beige;
+}
+#bucket-ext{
+    position: absolute;
+    left: 90px;
+    top: 200px;
+    width: 20px;
+    height: 40px;
+    background-color: beige;
+}
+#packet-wrapper{
+    margin-top: 50px;
+}
+#token-animate{
+    position: absolute;
+    bottom: 10px;
+    left: 95px;
+    margin: 0 auto;
+    z-index: 1;
+}
+#controls{
+    position: absolute;
+    left: 50px;
+    height: 200px;
+    width: 400px;
+    top: 80px;
+    color: whitesmoke;
+}
+.control{
+    width: 35px;
+    float: left;
+    padding: 0px 10px;
+    margin: auto;
+}
+button.control{
+    color: black;
+    font-size: 14px;
+}
+.control-row{
+    padding: 16px;
+}
+#packet-source{
+    background-color: darkcyan;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    text-align: center;
+    position: absolute;
+    color: whitesmoke;
+}
+#packet-destination{
+    background-color: green;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    text-align: center;
+    color: whitesmoke;
+    position: absolute;
+    right: 25px;
+}
+#packet-trash{
+    background-color: red;
+    width: 100px;
+    height: 50px;
+    z-index: 1;
+    text-align: center;
+    color: whitesmoke;
+    position: relative;
+    left: 568px;
+    top: 60px;
+}
+.title{
+    color: darkorange;
+    text-align: center;
+}
+#src-dst-wrapper{
+    height: 200px;
+}
+body{
+    color: whitesmoke;
+}
