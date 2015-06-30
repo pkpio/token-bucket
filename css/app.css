@@ -64,7 +64,7 @@ body{
     left: 50px;
     height: 200px;
     width: 400px;
-    top: 80px;
+    top: 140px;
     color: whitesmoke;
 }
 .control{
@@ -119,4 +119,10 @@ button.control{
 }
 body{
     color: whitesmoke;
+}
+
+#star-btn{
+    position: absolute;
+    top: 30px;
+    right: 40px;
 }
