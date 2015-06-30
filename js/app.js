@@ -243,7 +243,8 @@ function TokenAnimator(domobj, tl){
     /**
      * Animate token to Packet.
      *
-     *
+     * @param callback
+     *      Function to call after the animation has complete
      */
     this.animateToPacket = function(callback){
         this.reset();
